@@ -16,7 +16,7 @@ class JobController extends Controller
     {
         $jobs = Job::leftjoin('job_levels', 'job_levels.id', '=', 'jobs.joblevel_id')
                 ->leftjoin('job_types', 'job_types.id', '=', 'jobs.type_id')
-                ->where('company_id', Auth::user()->Company->id)
+                // ->where('company_id', Auth::user()->Company->id)
                 ->select('jobs.*', 'job_types.type_name as type', 'job_levels.joblevel_name as level')->paginate(15);
 
         return view('pages.list-jobs')->with('jobs', $jobs);
@@ -31,6 +31,36 @@ class JobController extends Controller
         $subcategory = $category->groupBy('category.category_name');
 
         return view('pages.create-job', compact('listLevel', 'listType', 'category', 'subcategory'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'lokasi' => 'required',
+            'type' => 'required',
+            'level' => 'required',
+            'education' => 'required',
+            'category' => 'required',
+            'experience' => 'required'
+        ]);
+
+        $job = new Job;
+        $job->company_id = Auth::user()->Company->id;
+        $job->job_title = $request->title;
+        $job->slug_title = \Str::slug($request->title);
+        $job->job_location = $request->lokasi;
+        $job->type_id = $request->type;
+        $job->category_id = $request->category;
+        $job->joblevel_id = $request->level;
+        $job->education = $request->education;
+        $job->work_time = $request->jam_kerja;
+        $job->experience = $request->experience;
+        $job->salary = $request->salary1+" - "+$request->salary2;
+        $job->job_description = $request->deskripsi;
+        
+        dd($job);
+
     }
 
     public function searchDB(Request $request)

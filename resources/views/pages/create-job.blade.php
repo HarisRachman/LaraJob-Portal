@@ -139,7 +139,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Tingkat Pekerjaan</label>
-                                                <select id="lType" name="type" class="form-control selectpicker"
+                                                <select id="lType" name="level" class="form-control selectpicker"
                                                     data-live-search="true">
                                                     <option value="" hidden>--Pilih Tingkat--</option>
                                                     @foreach ($listLevel as $key => $value)
@@ -159,7 +159,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Tingkat Pendidikan</label>
-                                                <select id="lType" name="type" class="form-control selectpicker"
+                                                <select id="lType" name="education" class="form-control selectpicker"
                                                     data-live-search="true" multiple data-max-options="3">
                                                     <option value="" hidden>--Pilih Tingkat Pendidikan--</option>
                                                     <option value="SMP/SLTP">SMP/SLTP</option>
@@ -180,14 +180,15 @@
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Kategori Pekerjaan</label>
-                                                <select id="lType" name="type" class="form-control selectpicker"
-                                                    data-live-search="true" multiple data-max-options="3">
+                                                <select id="lType" name="category" class="form-control selectpicker"
+                                                    data-live-search="true">
                                                     <option value="" hidden>--Pilih Tingkat Pendidikan--</option>
                                                     @foreach($subcategory as $sc => $category)
 
                                                     <optgroup label="{{ $sc }}">
                                                         @foreach($category as $cat)
-                                                        <option value="{{ $cat->id }}">{{ $cat->subcategory_name }}</option>
+                                                        <option value="{{ $cat->id }}">{{ $cat->subcategory_name }}
+                                                        </option>
                                                         @endforeach
                                                     </optgroup>
 
@@ -219,7 +220,8 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Jam Kerja</label>
                                                 <input class="form-control" type="type" id="jam_kerja" name="jam_kerja"
-                                                    value="{{ old('jam_kerja') }}" placeholder="cth: 08.00-17.00 / Senin-Jumat" />
+                                                    value="{{ old('jam_kerja') }}"
+                                                    placeholder="cth: 08.00-17.00 / Senin-Jumat" />
                                                 <span class="text-danger">
                                                     @error('jam_kerja')
                                                     {{ $message }}
@@ -228,6 +230,40 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="mb-4">
+                                                <label class="form-label">Range Salary</label>
+                                                <input class="form-control" type="range" name="salary1" id="salary1"
+                                                    value="3" min="0.5" max="50"
+                                                    oninput="salary1Output.value = salary1.value+' Jt'"
+                                                    value="{{ old('salary1') }}" />
+                                                <span><output id="salary1Output">3 Jt</output></span>
+                                                <span class="text-danger">
+                                                    @error('salary1')
+                                                    {{ $message }}
+                                                    @enderror
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-4">
+                                                <label class="form-label"> </label>
+                                                <input class="form-control" type="range" name="salary2" id="salary2"
+                                                    value="7" min="1" max="50"
+                                                    oninput="salary2Output.value = salary2.value+' Jt'"
+                                                    value="{{ old('salary2') }}" />
+                                                <span><output id="salary2Output">7 Jt</output></span>
+                                                <span class="text-danger">
+                                                    @error('salary2')
+                                                    {{ $message }}
+                                                    @enderror
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-4">
@@ -243,7 +279,8 @@
                                     </div>
 
                                     <div class="text-right mt-1">
-                                        <button type="submit" class="btn btn-mat waves-effect waves-light btn-info ">Submit</button>
+                                        <button type="submit"
+                                            class="btn btn-mat waves-effect waves-light btn-info ">Submit</button>
                                         {{-- <button type="submit" class="btn btn-lg btn-primary">Submit</button> --}}
                                     </div>
                                 </form>

@@ -85,10 +85,10 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Kelola Lowongan Pekerjaan Anda</h5>
+                                <h5>Kelola Lowongan Pekerjaan Anda</h5><br>
+                                <a href="{{ route('create-job') }}"
+                                        class="btn btn-primary waves-effect waves-light mt-3">Tambah Data</a>
                                 <div class="card-header-right">
-                                    <a href="{{ route('create-job') }}"
-                                        class="btn btn-primary waves-effect waves-light">Tambah Data</a>
                                     {{-- <ul class="list-unstyled card-option">
                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                         <li><i class="fa fa-window-maximize full-card"></i></li>
