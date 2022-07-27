@@ -81,11 +81,17 @@
     <div class="main-body">
         <div class="page-wrapper">
             <div class="page-body">
+                @if(Session::get('success'))
+                <div class="alert alert-success mb-2">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Kelola Lowongan Pekerjaan Anda</h5><br>
+                                <h5>Kelola Lowongan Pekerjaan Anda</h5>
+                                <br>
                                 <a href="{{ route('create-job') }}"
                                         class="btn btn-primary waves-effect waves-light mt-3">Tambah Data</a>
                                 <div class="card-header-right">
@@ -113,17 +119,20 @@
                                         </thead>
                                         <tbody>
                                             @if($jobs->isNotEmpty())
-                                            @foreach ($jobs as $job)
+                                            @foreach ($jobs as $index => $job)
                                             <tr>
-                                                <td scope="row">#</td>
+                                                <td scope="row">{{ $index +1 }}</td>
                                                 <td>{{ $job->job_title }}</td>
                                                 <td>{{ $job->job_location }}</td>
                                                 <td>{{ $job->type }}</td>
                                                 <td>{{ $job->level }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-sm btn-success">Edit</a>
-                                                    <a href="#" class="btn btn-sm btn-primary">View</a>
-                                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                                    <form action="{{ route('destroy-job', $job->id) }}" method="post">
+                                                        <a href="{{ route('edit-job', $job->id) }}" class="btn btn-sm btn-success">Edit</a>
+                                                        <a href="#" class="btn btn-sm btn-primary">View</a>
+                                                        @csrf
+                                                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             @endforeach

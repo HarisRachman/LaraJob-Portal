@@ -28,6 +28,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::view('/home', 'pages.home')->name('home');
 Route::get('/create-job', [JobController::class, 'create'])->name('create-job');
+Route::post('/store-job', [JobController::class, 'store'])->name('store-job');
+Route::get('/edit-job/{id}/edit', [JobController::class, 'edit'])->name('edit-job');
+Route::post('/delete-job/{id}', [JobController::class, 'destroy'])->name('destroy-job');
 
 Route::get('/list-jobs', [JobController::class, 'index'])->name('listJob');
 Route::get('search-from-db', [JobController::class, 'searchDB']);

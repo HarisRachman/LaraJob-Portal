@@ -106,7 +106,7 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Judul Pekerjaan</label>
                                                 <input class="form-control" type="type" name="title"
-                                                    value="{{ old('title') }}" placeholder="cth: Website Developer" />
+                                                    value="{{ $job->job_title }}" placeholder="cth: Website Developer" />
                                                 <span class="text-danger">
                                                     @error('title')
                                                     {{ $message }}
@@ -118,7 +118,7 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Lokasi</label>
                                                 <input class="form-control" type="type" id="lokasi" name="lokasi"
-                                                    value="{{ old('lokasi') }}"
+                                                    value="{{ $job->job_location }}"
                                                     placeholder="cari Kota atau Kabupaten" />
                                                 <span class="text-danger">
                                                     @error('lokasi')
@@ -137,7 +137,7 @@
                                                     data-live-search="true">
                                                     <option value="" hidden>--Pilih Tipe--</option>
                                                     @foreach ($listType as $key => $value)
-                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                    <option value="{{ $key }}" {{ $key == $job->type_id ? 'selected' : '' }}>{{ $value }}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="text-danger">
@@ -154,7 +154,7 @@
                                                     data-live-search="true">
                                                     <option value="" hidden>--Pilih Tingkat--</option>
                                                     @foreach ($listLevel as $key => $value)
-                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                    <option value="{{ $key }}" {{ $key == $job->joblevel_id ? 'selected' : '' }}>{{ $value }}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="text-danger">
@@ -197,7 +197,7 @@
                                                     @foreach ($category as $cat)
                                                     <optgroup label="{{ $cat->category_name }}">
                                                         @foreach ($cat->SubCategory as $sub)
-                                                            <option value="{{ $sub->id }}">{{ $sub->subcategory_name }}</option>
+                                                            <option value="{{ $sub->id }}" {{ $sub->id == $job->category_id ? 'selected' : '' }}>{{ $sub->subcategory_name }}</option>
                                                         @endforeach
                                                     </optgroup>
                                                     @endforeach
@@ -216,7 +216,7 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Pengalaman</label>
                                                 <input class="form-control" type="text" name="experience"
-                                                    value="{{ old('experience') }}" placeholder="cth: 1-2 Tahun" />
+                                                    value="{{ $job->experience }}" placeholder="cth: 1-2 Tahun" />
                                                 <span class="text-danger">
                                                     @error('experience')
                                                     {{ $message }}
@@ -228,7 +228,7 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Jam Kerja</label>
                                                 <input class="form-control" type="type" id="jam_kerja" name="jam_kerja"
-                                                    value="{{ old('jam_kerja') }}"
+                                                    value="{{ $job->work_time }}"
                                                     placeholder="cth: 08.00-17.00 / Senin-Jumat" />
                                                 <span class="text-danger">
                                                     @error('jam_kerja')
@@ -245,8 +245,7 @@
                                                 <label class="form-label">Range Salary</label>
                                                 <input class="form-control" type="range" name="salary1" id="salary1"
                                                     value="1" min="1" max="25"
-                                                    oninput="salary1Output.value = salary1.value+' Jt'"
-                                                    value="{{ old('salary1') }}" />
+                                                    oninput="salary1Output.value = salary1.value+' Jt'" />
                                                 <span><output id="salary1Output">1 Jt</output></span>
                                                 <span class="text-danger">
                                                     @error('salary1')
@@ -276,7 +275,7 @@
                                         <div class="col-md-12">
                                             <div class="mb-4">
                                                 <label class="form-label">Deskripsi Pekerjaan</label>
-                                                <textarea name="deskripsi"></textarea>
+                                                <textarea name="deskripsi">{{ $job->job_description }}</textarea>
                                                 <span class="text-danger">
                                                     @error('deskripsi')
                                                     {{ $message }}
