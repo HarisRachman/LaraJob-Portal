@@ -14,4 +14,9 @@ class JobLevel extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['job_level_name'];
+
+    public function Job()
+    {
+        return $this->hasMany(Job::class, 'joblevel_id');
+    }
 }

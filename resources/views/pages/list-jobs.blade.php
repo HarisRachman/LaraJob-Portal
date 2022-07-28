@@ -129,7 +129,7 @@
                                                 <td>
                                                     <form action="{{ route('destroy-job', $job->id) }}" method="post">
                                                         <a href="{{ route('edit-job', $job->id) }}" class="btn btn-sm btn-success">Edit</a>
-                                                        <a href="#" class="btn btn-sm btn-primary">View</a>
+                                                        <a href="{{ route('view-job', $job->id) }}" class="btn btn-sm btn-primary">View</a>
                                                         @csrf
                                                         <button class="btn btn-sm btn-danger" type="submit">Delete</button>
                                                     </form>

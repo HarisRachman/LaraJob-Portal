@@ -117,6 +117,15 @@ class JobController extends Controller
 
     }
 
+    public function view($id)
+    {
+        $job = Job::find($id);
+
+        // dd($job->Category);
+
+        return view('pages.view', compact('job'));
+    }
+
     public function destroy($id)
     {
         // dd($id);
