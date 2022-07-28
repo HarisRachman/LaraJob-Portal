@@ -173,13 +173,13 @@
                                                 <select id="lType" name="education[]" class="form-control selectpicker"
                                                     data-live-search="true" multiple data-max-options="3">
                                                     <option value="" hidden>--Pilih Tingkat Pendidikan--</option>
-                                                    <option value="SMP/SLTP">SMP/SLTP</option>
-                                                    <option value="SMA/SMK/STM">SMA/SMK/STM</option>
-                                                    <option value="Diploma/D1/D2/D3">Diploma/D1/D2/D3</option>
-                                                    <option value="Sarjana/S1">Sarjana/S1</option>
-                                                    <option value="Master/S2">Master/S2</option>
-                                                    <option value="Doctor/S3">Doctor/S3</option>
-                                                    <option value="Semua Jenjang">Semua Jenjang</option>
+                                                    <option value="SMP/SLTP" {{ (in_array("SMP/SLTP", explode(",", $job->education))) ? 'selected' : '' }}>SMP/SLTP</option>
+                                                    <option value="SMA/SMK/STM" {{ (in_array("SMA/SMK/STM", explode(",", $job->education))) ? 'selected' : '' }}>SMA/SMK/STM</option>
+                                                    <option value="Diploma/D1/D2/D3" {{ (in_array("Diploma/D1/D2/D3", explode(",", $job->education))) ? 'selected' : '' }}>Diploma/D1/D2/D3</option>
+                                                    <option value="Sarjana/S1" {{ (in_array("Sarjana/S1", explode(",", $job->education))) ? 'selected' : '' }}>Sarjana/S1</option>
+                                                    <option value="Master/S2" {{ (in_array("Master/S2", explode(",", $job->education))) ? 'selected' : '' }}>Master/S2</option>
+                                                    <option value="Doctor/S3" {{ (in_array("Doctor/S3", explode(",", $job->education))) ? 'selected' : '' }}>Doctor/S3</option>
+                                                    <option value="Semua Jenjang" {{ (in_array("Semua Jenjang", explode(",", $job->education))) ? 'selected' : '' }}>Semua Jenjang</option>
                                                 </select>
                                                 <span class="text-danger">
                                                     @error('type')
