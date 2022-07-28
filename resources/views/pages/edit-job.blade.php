@@ -99,14 +99,17 @@
                                 @endif
                             </div>
                             <div class="card-body">
-                                <form name="autocomplete-textbox" id="autocomplete-textbox" method="post" action="{{ route('store-job') }}">
+                                <form name="autocomplete-textbox" id="autocomplete-textbox" method="post"
+                                    action="{{ route('update-job', $job->id) }}">
                                     @csrf
+                                    @method('patch')
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Judul Pekerjaan</label>
                                                 <input class="form-control" type="type" name="title"
-                                                    value="{{ $job->job_title }}" placeholder="cth: Website Developer" />
+                                                    value="{{ $job->job_title }}"
+                                                    placeholder="cth: Website Developer" />
                                                 <span class="text-danger">
                                                     @error('title')
                                                     {{ $message }}
@@ -137,7 +140,8 @@
                                                     data-live-search="true">
                                                     <option value="" hidden>--Pilih Tipe--</option>
                                                     @foreach ($listType as $key => $value)
-                                                    <option value="{{ $key }}" {{ $key == $job->type_id ? 'selected' : '' }}>{{ $value }}</option>
+                                                    <option value="{{ $key }}" {{ $key==$job->type_id ? 'selected' : ''
+                                                        }}>{{ $value }}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="text-danger">
@@ -154,7 +158,8 @@
                                                     data-live-search="true">
                                                     <option value="" hidden>--Pilih Tingkat--</option>
                                                     @foreach ($listLevel as $key => $value)
-                                                    <option value="{{ $key }}" {{ $key == $job->joblevel_id ? 'selected' : '' }}>{{ $value }}</option>
+                                                    <option value="{{ $key }}" {{ $key==$job->joblevel_id ? 'selected' :
+                                                        '' }}>{{ $value }}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="text-danger">
@@ -173,13 +178,22 @@
                                                 <select id="lType" name="education[]" class="form-control selectpicker"
                                                     data-live-search="true" multiple data-max-options="3">
                                                     <option value="" hidden>--Pilih Tingkat Pendidikan--</option>
-                                                    <option value="SMP/SLTP" {{ (in_array("SMP/SLTP", explode(",", $job->education))) ? 'selected' : '' }}>SMP/SLTP</option>
-                                                    <option value="SMA/SMK/STM" {{ (in_array("SMA/SMK/STM", explode(",", $job->education))) ? 'selected' : '' }}>SMA/SMK/STM</option>
-                                                    <option value="Diploma/D1/D2/D3" {{ (in_array("Diploma/D1/D2/D3", explode(",", $job->education))) ? 'selected' : '' }}>Diploma/D1/D2/D3</option>
-                                                    <option value="Sarjana/S1" {{ (in_array("Sarjana/S1", explode(",", $job->education))) ? 'selected' : '' }}>Sarjana/S1</option>
-                                                    <option value="Master/S2" {{ (in_array("Master/S2", explode(",", $job->education))) ? 'selected' : '' }}>Master/S2</option>
-                                                    <option value="Doctor/S3" {{ (in_array("Doctor/S3", explode(",", $job->education))) ? 'selected' : '' }}>Doctor/S3</option>
-                                                    <option value="Semua Jenjang" {{ (in_array("Semua Jenjang", explode(",", $job->education))) ? 'selected' : '' }}>Semua Jenjang</option>
+                                                    <option value="SMP/SLTP" {{ (in_array("SMP/SLTP", explode(",",
+                                                        $job->education))) ? 'selected' : '' }}>SMP/SLTP</option>
+                                                    <option value="SMA/SMK/STM" {{ (in_array("SMA/SMK/STM", explode(",",
+                                                        $job->education))) ? 'selected' : '' }}>SMA/SMK/STM</option>
+                                                    <option value="Diploma/D1/D2/D3" {{ (in_array("Diploma/D1/D2/D3",
+                                                        explode(",", $job->education))) ? 'selected' : ''
+                                                        }}>Diploma/D1/D2/D3</option>
+                                                    <option value="Sarjana/S1" {{ (in_array("Sarjana/S1", explode(",",
+                                                        $job->education))) ? 'selected' : '' }}>Sarjana/S1</option>
+                                                    <option value="Master/S2" {{ (in_array("Master/S2", explode(",",
+                                                        $job->education))) ? 'selected' : '' }}>Master/S2</option>
+                                                    <option value="Doctor/S3" {{ (in_array("Doctor/S3", explode(",",
+                                                        $job->education))) ? 'selected' : '' }}>Doctor/S3</option>
+                                                    <option value="Semua Jenjang" {{ (in_array("Semua Jenjang",
+                                                        explode(",", $job->education))) ? 'selected' : '' }}>Semua
+                                                        Jenjang</option>
                                                 </select>
                                                 <span class="text-danger">
                                                     @error('type')
@@ -197,7 +211,8 @@
                                                     @foreach ($category as $cat)
                                                     <optgroup label="{{ $cat->category_name }}">
                                                         @foreach ($cat->SubCategory as $sub)
-                                                            <option value="{{ $sub->id }}" {{ $sub->id == $job->category_id ? 'selected' : '' }}>{{ $sub->subcategory_name }}</option>
+                                                        <option value="{{ $sub->id }}" {{ $sub->id == $job->category_id
+                                                            ? 'selected' : '' }}>{{ $sub->subcategory_name }}</option>
                                                         @endforeach
                                                     </optgroup>
                                                     @endforeach

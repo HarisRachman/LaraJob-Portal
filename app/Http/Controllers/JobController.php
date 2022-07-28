@@ -79,6 +79,44 @@ class JobController extends Controller
         return view('pages.edit-job', compact('job', 'listLevel', 'listType', 'category'));
     }
 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'lokasi' => 'required',
+            'type' => 'required',
+            'level' => 'required',
+            'education' => 'required',
+            'category' => 'required',
+            'jam_kerja' => 'required',
+            'deskripsi' => 'required',
+            'experience' => 'required'
+        ]);
+
+        $job = Job::find($id);
+        $job->company_id = Auth::user()->Company->id;
+        $job->job_title = $request->title;
+        $job->slug_title = \Str::slug($request->title);
+        $job->job_location = $request->lokasi;
+        $job->type_id = $request->type;
+        $job->category_id = $request->category;
+        $job->joblevel_id = $request->level;
+        $job->education = implode(',', $request->education);
+        $job->work_time = $request->jam_kerja;
+        $job->experience = $request->experience;
+        $job->salary = $request->salary1." Jt - ".$request->salary2.' Jt';
+        $job->job_description = $request->deskripsi;
+        
+        $save = $job->save();
+
+        if($save) {
+            return redirect()->route('listJob')->with('success', 'Updating job data successfully');
+        }else {
+            return redirect()->back()->with('fail', 'Something went wrong, failed to update data');
+        }
+
+    }
+
     public function destroy($id)
     {
         // dd($id);

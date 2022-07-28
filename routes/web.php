@@ -30,6 +30,7 @@ Route::view('/home', 'pages.home')->name('home');
 Route::get('/create-job', [JobController::class, 'create'])->name('create-job');
 Route::post('/store-job', [JobController::class, 'store'])->name('store-job');
 Route::get('/edit-job/{id}/edit', [JobController::class, 'edit'])->name('edit-job');
+Route::patch('/update-job/{id}/update', [JobController::class, 'update'])->name('update-job');
 Route::post('/delete-job/{id}', [JobController::class, 'destroy'])->name('destroy-job');
 
 Route::get('/list-jobs', [JobController::class, 'index'])->name('listJob');
