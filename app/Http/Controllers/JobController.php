@@ -19,7 +19,7 @@ class JobController extends Controller
                 ->where('company_id', Auth::user()->Company->id)
                 ->select('jobs.*', 'job_types.type_name as type', 'job_levels.joblevel_name as level')->paginate(15);
 
-        return view('pages.list-jobs')->with('jobs', $jobs);
+        return view('pages.job.list-jobs')->with('jobs', $jobs);
     }
     
     public function create()
@@ -29,7 +29,7 @@ class JobController extends Controller
 
         $category = Category::with('SubCategory')->get();
 
-        return view('pages.create-job', compact('listLevel', 'listType', 'category'));
+        return view('pages.job.create-job', compact('listLevel', 'listType', 'category'));
     }
 
     public function store(Request $request)
@@ -76,7 +76,7 @@ class JobController extends Controller
         $listLevel = DB::table('job_levels')->pluck('joblevel_name', 'id');
         $listType = DB::table('job_types')->pluck('type_name', 'id');
         $job = Job::where('id', $id)->first();
-        return view('pages.edit-job', compact('job', 'listLevel', 'listType', 'category'));
+        return view('pages.job.edit-job', compact('job', 'listLevel', 'listType', 'category'));
     }
 
     public function update(Request $request, $id)
@@ -143,7 +143,7 @@ class JobController extends Controller
 
         // dd($job->Category);
 
-        return view('pages.view', compact('job'));
+        return view('pages.job.view', compact('job'));
     }
 
     public function destroy($id)

@@ -46,6 +46,13 @@
                 <span class="pcoded-mcaret"></span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('listType') }}" class="waves-effect waves-dark">
+                <span class="pcoded-micon"><i class="ti-briefcase"></i><b>LT</b></span>
+                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Type Job</span>
+                <span class="pcoded-mcaret"></span>
+            </a>
+        </li>
     </ul>
 
 </div>

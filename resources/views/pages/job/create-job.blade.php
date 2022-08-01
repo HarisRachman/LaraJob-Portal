@@ -105,7 +105,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Judul Pekerjaan</label>
-                                                <input class="form-control" type="type" name="title"
+                                                <input class="form-control" type="text" name="title"
                                                     value="{{ old('title') }}" placeholder="cth: Website Developer" />
                                                 <span class="text-danger">
                                                     @error('title')
@@ -117,7 +117,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-4">
                                                 <label class="form-label">Lokasi</label>
-                                                <input class="form-control" type="type" id="lokasi" name="lokasi"
+                                                <input class="form-control" type="text" id="lokasi" name="lokasi"
                                                     value="{{ old('lokasi') }}"
                                                     placeholder="cari Kota atau Kabupaten" />
                                                 <span class="text-danger">
