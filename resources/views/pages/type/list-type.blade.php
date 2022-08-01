@@ -48,8 +48,15 @@
         </li>
         <li class="active">
             <a href="#" class="waves-effect waves-dark">
-                <span class="pcoded-micon"><i class="ti-briefcase"></i><b>LJ</b></span>
-                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Type Job</span>
+                <span class="pcoded-micon"><i class="ti-briefcase"></i><b>JT</b></span>
+                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Job Types</span>
+                <span class="pcoded-mcaret"></span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('listLevel') }}" class="waves-effect waves-dark">
+                <span class="pcoded-micon"><i class="ti-briefcase"></i><b>JL</b></span>
+                <span class="pcoded-mtext" data-i18n="nav.form-components.main">Job Levels</span>
                 <span class="pcoded-mcaret"></span>
             </a>
         </li>

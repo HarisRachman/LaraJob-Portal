@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\JobLevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,10 @@ Route::get('/list-job-types', [TypeController::class, 'index'])->name('listType'
 Route::post('/delete-job-type/{id}', [TypeController::class, 'destroy'])->name('destroy-type');
 Route::post('/store-job-type', [TypeController::class, 'store'])->name('store-type');
 Route::patch('/update-job-type/{id}', [TypeController::class, 'update'])->name('update-type');
+
+Route::get('/list-job-levels', [JobLevelController::class, 'index'])->name('listLevel');
+Route::post('/delete-job-level/{id}', [JobLevelController::class, 'destroy'])->name('destroy-level');
+Route::post('/store-job-level', [JobLevelController::class, 'store'])->name('store-level');
+Route::patch('/update-job-level/{id}', [JobLevelController::class, 'update'])->name('update-level');
 
 Route::get('search-from-db', [JobController::class, 'searchDB']);
