@@ -33,6 +33,7 @@ Route::get('/edit-job/{id}/edit', [JobController::class, 'edit'])->name('edit-jo
 Route::patch('/update-job/{id}/update', [JobController::class, 'update'])->name('update-job');
 Route::get('/view-job/{id}', [JobController::class, 'view'])->name('view-job');
 Route::post('/delete-job/{id}', [JobController::class, 'destroy'])->name('destroy-job');
+Route::patch('/publish-job/{id}/publish', [JobController::class, 'publish'])->name('publish-job');
 
 Route::get('/list-jobs', [JobController::class, 'index'])->name('listJob');
 Route::get('search-from-db', [JobController::class, 'searchDB']);

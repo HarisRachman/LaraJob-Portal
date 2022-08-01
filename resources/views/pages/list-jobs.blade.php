@@ -110,11 +110,12 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <td>Judul</td>
-                                                <td>Lokasi</td>
-                                                <td>Type</td>
-                                                <td>Tingkat Pekerjaan</td>
-                                                <td>Action</td>
+                                                <th>Judul</th>
+                                                <th>Lokasi</th>
+                                                <th>Type</th>
+                                                <th>Tingkat Pekerjaan</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -126,13 +127,25 @@
                                                 <td>{{ $job->job_location }}</td>
                                                 <td>{{ $job->type }}</td>
                                                 <td>{{ $job->level }}</td>
+                                                <td style="color:white">
+                                                    @if($job->status == 'Published')
+                                                        <a href="#" class="dropdown-item bs-tooltip" data-myid="{{ $job->id }}" data-toggle="modal" data-target=".unpublishJob" data-original-title="Unpublish"><span class="badge badge-success" style="padding:7px">{{ $job->status }}</span></a>
+                                                    @else
+                                                        <a href="#" class="dropdown-item bs-tooltip" data-myid="{{ $job->id }}" data-toggle="modal" data-target=".publishJob" data-original-title="Publish"><span class="badge badge-warning" style="padding:7px">{{ $job->status }}</span></a>
+                                                    @endif
+                                                </td>
                                                 <td>
-                                                    <form action="{{ route('destroy-job', $job->id) }}" method="post">
-                                                        <a href="{{ route('edit-job', $job->id) }}" class="btn btn-sm btn-success">Edit</a>
-                                                        <a href="{{ route('view-job', $job->id) }}" class="btn btn-sm btn-primary">View</a>
-                                                        @csrf
-                                                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
-                                                    </form>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Action
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a href="{{ route('edit-job', $job->id) }}" class="dropdown-item">Edit</a>
+                                                            <a href="{{ route('view-job', $job->id) }}" class="dropdown-item">View</a>
+                                                            <a href="#" class="dropdown-item bs-tooltip" data-myid="{{ $job->id }}" data-toggle="modal" data-target=".deleteData" data-original-title="Delete">Delete</a>
+                                                            <!-- <a href="{{ route('destroy-job', $job->id) }}" onclick="return confirm('Are you sure delete this data?')" class="dropdown-item">Delete</a> -->
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -145,6 +158,84 @@
                                     </table>
                                 </div>
                             </div>
+
+                            <div class="modal fade deleteData" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Delete Confirmation</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="modal-body">
+                                            <p class="font-weight-bold mb-2"> Are you sure to delete this job vacancy ?</p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <form action="" id="formDelete" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-rounded mt-3 mb-4">Ya, Hapus!</button>
+                                                <button type="button" class="btn btn-default btn-rounded mt-3 mb-4" data-dismiss="modal">Tidak, Batalkan!</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade publishJob" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Job Vacancy Publishing Confirmation</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="modal-body">
+                                            <p class="font-weight-bold mb-2"> Are you sure to publish this job vacancy ?</p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <form action="" id="formConfirm" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-success btn-rounded mt-3 mb-4">Ya, Publish!</button>
+                                                <button type="button" class="btn btn-default btn-rounded mt-3 mb-4" data-dismiss="modal">Tidak, Batalkan!</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade unpublishJob" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Job Vacancy Unpublishing Confirmation</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="modal-body">
+                                            <p class="font-weight-bold mb-2"> Are you sure to unpublish this job vacancy ?</p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <form action="" id="formConfirm" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-success btn-rounded mt-3 mb-4">Ya, Unpublish!</button>
+                                                <button type="button" class="btn btn-default btn-rounded mt-3 mb-4" data-dismiss="modal">Tidak, Batalkan!</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -152,4 +243,38 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $('.deleteData').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var id_delete = button.data('myid')
+        var url = '{{ route("destroy-job", ":id") }}';
+        url = url.replace(':id', id_delete);
+        var modal = $(this)
+        modal.find('.modal-footer #id_delete').val(id_delete);
+        modal.find('.modal-footer #formDelete').attr('action', url);
+    })
+
+    $('.publishJob').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var id_publish = button.data('myid')
+        var url = '{{ route("publish-job", ":id") }}';
+        url = url.replace(':id', id_publish);
+        var modal = $(this)
+        modal.find('.modal-footer #id_publish').val(id_publish);
+        modal.find('.modal-footer #formConfirm').attr('action', url);
+    })
+
+    $('.unpublishJob').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var id_publish = button.data('myid')
+        var url = '{{ route("publish-job", ":id") }}';
+        url = url.replace(':id', id_publish);
+        var modal = $(this)
+        modal.find('.modal-footer #id_publish').val(id_publish);
+        modal.find('.modal-footer #formConfirm').attr('action', url);
+    })
+</script>
 @endsection

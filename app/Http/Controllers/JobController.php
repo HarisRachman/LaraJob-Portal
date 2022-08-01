@@ -117,6 +117,26 @@ class JobController extends Controller
 
     }
 
+    public function publish(Request $request, $id)
+    {
+        $job = Job::find($id);
+        // \dd($job->status);
+        if ($job->status == 'Published') {
+            $job->status = "Not Published";
+        } else {
+            $job->status = "Published";
+        }
+        
+        $save = $job->save();
+
+        if($save) {
+            return redirect()->route('listJob')->with('success', 'Unpublishing job vacancy successfully');
+        }else {
+            return redirect()->back()->with('fail', 'Something went wrong, failed to unpublish job vacancy');
+        }
+
+    }
+
     public function view($id)
     {
         $job = Job::find($id);

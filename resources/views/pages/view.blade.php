@@ -24,8 +24,8 @@
                     <i class="fa fa-map-marker"></i> {{ $job->job_location }} &nbsp;&nbsp;
                     <i class="fa fa-calendar"></i> {{ date('d-m-Y', strtotime($job->created_at)) }} &nbsp;&nbsp;
                     <i class="fa fa-file"></i> {{ $job->JobType->type_name }}
+                    <i class="fa fa-file"></i> {{ $job->education }}
                 </p>
-
 
             </form>
         </div>
