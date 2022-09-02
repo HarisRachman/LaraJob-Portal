@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-     <title>PHPJabbers.com | Free Job Agency Website Template</title>
+     <title>LaraJob Portal</title>
 
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -12,7 +12,8 @@
      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
      <link rel="stylesheet" href="{{asset('job/css/bootstrap.min.css')}}">
-     <link rel="stylesheet" href="{{asset('job/css/font-awesome.min.css')}}">
+     <!-- <link rel="stylesheet" href="{{asset('job/css/font-awesome.min.css')}}"> -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
      <link rel="stylesheet" href="{{asset('job/css/owl.carousel.css')}}">
      <link rel="stylesheet" href="{{asset('job/css/owl.theme.default.min.css')}}">
 
@@ -70,9 +71,7 @@
           </div>
      </section>
 
-     <section>
-          @yield('content')
-     </section>
+     @yield('content')
 
      <!-- FOOTER -->
      <footer id="footer">
