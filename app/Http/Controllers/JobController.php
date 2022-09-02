@@ -14,10 +14,16 @@ class JobController extends Controller
     
     public function index()
     {
-        $jobs = Job::leftjoin('job_levels', 'job_levels.id', '=', 'jobs.joblevel_id')
+        if(Auth::user()->role_id == 2) {
+            $jobs = Job::leftjoin('job_levels', 'job_levels.id', '=', 'jobs.joblevel_id')
                 ->leftjoin('job_types', 'job_types.id', '=', 'jobs.type_id')
                 ->where('company_id', Auth::user()->Company->id)
                 ->select('jobs.*', 'job_types.type_name as type', 'job_levels.joblevel_name as level')->paginate(15);
+        } else {
+            $jobs = Job::leftjoin('job_levels', 'job_levels.id', '=', 'jobs.joblevel_id')
+                ->leftjoin('job_types', 'job_types.id', '=', 'jobs.type_id')
+                ->select('jobs.*', 'job_types.type_name as type', 'job_levels.joblevel_name as level')->paginate(15);
+        }
 
         return view('pages.job.list-jobs')->with('jobs', $jobs);
     }

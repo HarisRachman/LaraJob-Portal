@@ -190,7 +190,7 @@
                                 <a href="#!" class="waves-effect waves-light">
                                     <img src="{{asset('assets/images/avatar-4.jpg')}}" class="img-radius"
                                         alt="User-Profile-Image">
-                                    <span>John Doe</span>
+                                    <span>{{ Auth::user()->name }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
@@ -231,8 +231,18 @@
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-
-                        @yield('sidebar')
+                        
+                        <div class="pcoded-inner-navbar main-menu">
+                            <div class="">
+                                <div class="main-menu-header">
+                                    <img class="img-80 img-radius" src="{{asset('assets/images/avatar-4.jpg')}}" alt="User-Profile-Image">
+                                    <div class="user-details">
+                                        <span id="more-details">{{ Auth::user()->name }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            @yield('sidebar')
+                        </div>
                     
                     </nav>
                     <div class="pcoded-content">

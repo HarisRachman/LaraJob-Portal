@@ -1,35 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('sidebar')
-<div class="pcoded-inner-navbar main-menu">
-    <div class="">
-        <div class="main-menu-header">
-            <img class="img-80 img-radius" src="{{asset('assets/images/avatar-4.jpg')}}" alt="User-Profile-Image">
-            <div class="user-details">
-                <span id="more-details">John Doe<i class="fa fa-caret-down"></i></span>
-            </div>
-        </div>
-
-        {{-- <div class="main-menu-content">
-            <ul>
-                <li class="more-details">
-                    <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                    <a href="#!"><i class="ti-settings"></i>Settings</a>
-                    <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
-                </li>
-            </ul>
-        </div> --}}
-    </div>
-    {{-- <div class="p-15 p-b-0">
-        <form class="form-material">
-            <div class="form-group form-primary">
-                <input type="text" name="footer-email" class="form-control" required="">
-                <span class="form-bar"></span>
-                <label class="float-label"><i class="fa fa-search m-r-10"></i>Search
-                    Friend</label>
-            </div>
-        </form>
-    </div> --}}
     <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Pages</div>
     <ul class="pcoded-item pcoded-left-item">
         <li>
@@ -61,8 +32,6 @@
             </a>
         </li>
     </ul>
-
-</div>
 @endsection
 
 @section('content')
@@ -124,6 +93,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                @if(Auth::user()->role_id == 1)
+                                                    <th>Perusahaan</th>
+                                                @endif
                                                 <th>Judul</th>
                                                 <th>Lokasi</th>
                                                 <th>Type</th>
@@ -137,15 +109,18 @@
                                             @foreach ($jobs as $index => $job)
                                             <tr>
                                                 <td scope="row">{{ $index +1 }}</td>
+                                                @if(Auth::user()->role_id == 1)
+                                                    <td>{{ $job->Company->company_name }}</td>
+                                                @endif
                                                 <td>{{ $job->job_title }}</td>
                                                 <td>{{ $job->job_location }}</td>
                                                 <td>{{ $job->type }}</td>
                                                 <td>{{ $job->level }}</td>
                                                 <td style="color:white">
                                                     @if($job->status == 'Published')
-                                                        <a href="#" class="dropdown-item bs-tooltip" data-myid="{{ $job->id }}" data-toggle="modal" data-target=".unpublishJob" data-original-title="Unpublish"><span class="badge badge-success" style="padding:7px">{{ $job->status }}</span></a>
+                                                        <a href="#" class="bs-tooltip" data-myid="{{ $job->id }}" data-toggle="modal" data-target=".unpublishJob" data-original-title="Unpublish"><span class="badge badge-success" style="padding:12px;">{{ $job->status }}</span></a>
                                                     @else
-                                                        <a href="#" class="dropdown-item bs-tooltip" data-myid="{{ $job->id }}" data-toggle="modal" data-target=".publishJob" data-original-title="Publish"><span class="badge badge-warning" style="padding:7px">{{ $job->status }}</span></a>
+                                                        <a href="#" class="bs-tooltip" data-myid="{{ $job->id }}" data-toggle="modal" data-target=".publishJob" data-original-title="Publish"><span class="badge badge-warning" style="padding:12px">{{ $job->status }}</span></a>
                                                     @endif
                                                 </td>
                                                 <td>
