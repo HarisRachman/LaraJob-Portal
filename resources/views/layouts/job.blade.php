@@ -71,7 +71,9 @@
           </div>
      </section>
 
-     @yield('content')
+     <section>
+          @yield('content')
+     </section>
 
      <!-- FOOTER -->
      <footer id="footer">

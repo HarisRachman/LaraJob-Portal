@@ -60,7 +60,7 @@ class JobController extends Controller
         $job->type_id = $request->type;
         $job->category_id = $request->category;
         $job->joblevel_id = $request->level;
-        $job->education = implode(',', $request->education);
+        $job->education = implode(', ', $request->education);
         $job->work_time = $request->jam_kerja;
         $job->experience = $request->experience;
         $job->salary = $request->salary1." Jt - ".$request->salary2.' Jt';
@@ -136,7 +136,11 @@ class JobController extends Controller
         $save = $job->save();
 
         if($save) {
-            return redirect()->route('listJob')->with('success', 'Unpublishing job vacancy successfully');
+            if ($job->status == 'Published') {
+                return redirect()->route('listJob')->with('success', 'Publishing job vacancy successfully');
+            } else {
+                return redirect()->route('listJob')->with('success', 'Unpublishing job vacancy successfully');
+            }
         }else {
             return redirect()->back()->with('fail', 'Something went wrong, failed to unpublish job vacancy');
         }
